@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { nanoid } from 'nanoid';
 import './Taglist.css';
 
 export default function Taglist({ tags }) {
@@ -22,19 +23,24 @@ export default function Taglist({ tags }) {
               ["Par.Meld.stoerm", "Word"],
               ["Par.Meld.Warnung", "Word"],
               ["Par.Bits.Anzeigen", "DWord"],
-              ["Par.Bits.Steuer", "DWord"]].map(x => x.map(y => <td>{y}</td>)).map(x => <tr>{x}</tr>);
+              ["Par.Bits.Steuer", "DWord"]].map(x => x.map((y) =><td key={nanoid()}>{y}</td>)).map(x => <tr key={nanoid()} >{x}</tr>);
 
   return (
     <form method="post" onSubmit={handleSubmit}>
       <table >
-        <thead><td>Tag</td><td>type</td></thead>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>type</th>
+          </tr>
+        </thead>
         <tbody>
           {tableData}
         </tbody>
       </table>
-      <button id="addRow" type="button" >Add new row</button>
-      <button id="reset" type="reset">Reset edits</button>
-      <button id="submit" type="submit">Save post</button>
+      <button id="addRow" type="button" key="addRow">Add new row</button>
+      <button id="reset" type="reset" key="reset">Reset edits</button>
+      <button id="submit" type="submit" key="submit">Save post</button>
     </form>
   )
 }
